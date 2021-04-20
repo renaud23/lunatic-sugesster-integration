@@ -1,0 +1,70 @@
+@mixin fontFamilyInput() {
+  font-family: “Playfair Display”, “Didot”, "Times New Roman", Times, serif;
+}
+
+@mixin placeholder {
+  color: gray;
+  @include fontFamilyInput();
+  font-size: 15px;
+  line-height: 30px;
+  vertical-align: middle;
+  font-weight: normal;
+}
+
+.custom-theme {
+  &.lunatic-suggester {
+    min-height: 30px;
+    width: 100%;
+    .lunatic-suggester-container {
+      /* */
+      border-radius: 5px;
+      border: solid 1px gray;
+
+      &.focused {
+        box-shadow: 0 2px 2px grey;
+      }
+      background-color: snow;
+      /* */
+      .lunatic-suggester-selection {
+        @include fontFamilyInput();
+
+        .lunatic-suggester-input {
+          height: 30px;
+          line-height: 30px;
+          font-size: 15px;
+
+          &::placeholder {
+            @include placeholder();
+          }
+        }
+
+        .lunatic-suggester-selected {
+          height: 30px;
+          line-height: 30px;
+          background-color: snow;
+
+          .placeholder {
+            display: block;
+
+            @include placeholder();
+          }
+          .selection {
+            display: block;
+            line-height: 30px;
+          }
+        }
+      }
+
+      /* */
+      .lunatic-suggester-panel {
+        height: 0;
+        opacity: 0;
+        &.focused {
+          opacity: 1;
+          height: max-content;
+          overflow-y: scroll;
+        }
+      }
+    }
+  }
+}
