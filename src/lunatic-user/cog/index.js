@@ -6,6 +6,7 @@ const DEFAULT = {
   store,
   optionRenderer: OptionRenderer,
   labelRenderer: undefined,
+  fetch,
 };
 export { store, fetch, OptionRenderer };
 export default DEFAULT;

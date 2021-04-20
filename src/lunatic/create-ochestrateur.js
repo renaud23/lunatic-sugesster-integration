@@ -6,7 +6,6 @@ import { LunaticIDBSuggester } from "lunatic-suggester";
  * @param {*} getStoreInfo
  * @returns
  */
-
 function create(getStoreInfo) {
   return function (json) {
     const { components } = json;
@@ -16,11 +15,12 @@ function create(getStoreInfo) {
         if (componentType === "IdbSuggester") {
           const { storeName } = component;
           const { optionRenderer, labelRenderer } = getStoreInfo(storeName);
+          console.log(storeName);
           return [
             ...a,
             <LunaticIDBSuggester
-              key={`ochetrateur-${index + 1}`}
-              name={storeName}
+              key={`orchestrateur-${index + 1}`}
+              storeName={storeName}
               optionRenderer={optionRenderer}
               labelRenderer={labelRenderer}
             />,
