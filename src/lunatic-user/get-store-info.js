@@ -7,13 +7,12 @@
  * Perso je pense qu'il vaudrais mieux laisser le soin à chaque intégrateur de proposer ses propres implèmentations.
  *
  */
+import cog from "./cog";
+import nafRev2 from "./naf-rev2";
 
 const STORES = {
-  cog: {
-    store: undefined,
-    optionRenderer: undefined,
-    labelRenderer: undefined,
-  },
+  cog,
+  nafRev2,
 };
 
 function getStoreInfo(name) {

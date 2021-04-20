@@ -15,11 +15,14 @@ function create(getStoreInfo) {
         const { componentType } = component;
         if (componentType === "IdbSuggester") {
           const { storeName } = component;
+          const { optionRenderer, labelRenderer } = getStoreInfo(storeName);
           return [
             ...a,
             <LunaticIDBSuggester
               key={`ochetrateur-${index + 1}`}
               name={storeName}
+              optionRenderer={optionRenderer}
+              labelRenderer={labelRenderer}
             />,
           ];
         }
