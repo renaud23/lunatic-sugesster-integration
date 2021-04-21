@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { storeIndex } from "lunatic-suggester";
 import Progress from "./progress";
 
-function postLoad() {
-  console.log("end");
-}
+const ENV_PATH = process.env.REACT_APP_BASE_PATH;
+
+function postLoad() {}
 
 function Loader({
   start,
@@ -22,7 +22,7 @@ function Loader({
     function () {
       async function load() {
         if (typeof fetch === "function" && start) {
-          const e = await fetch();
+          const e = await fetch(ENV_PATH);
           setEntities(e);
         }
       }
