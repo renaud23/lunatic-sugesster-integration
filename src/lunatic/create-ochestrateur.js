@@ -34,7 +34,7 @@ function create(getStoreInfo) {
       return components.reduce(function (a, component, index) {
         const { componentType } = component;
         if (componentType === "IdbSuggester") {
-          const { storeName, label, className } = component;
+          const { storeName, label, className, max } = component;
           const storeInfo = getStoreInfo(storeName);
           const labelId = `lunatic-label-${storeName}`;
           return [
@@ -45,6 +45,7 @@ function create(getStoreInfo) {
               label={label}
               labelId={labelId}
               className={className}
+              max={max}
             />,
           ];
         }

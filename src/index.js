@@ -16,17 +16,19 @@ const JSON_LUNATIC = {
       },
       storeName: "cog",
       className: " custom-theme",
+      max: 10,
     },
     {
       id: "ffnw9cqz",
       componentType: "IdbSuggester",
       mandatory: false,
-      label: "Suggester NAf-REV2",
+      label: "Suggester NAF-REV2",
       response: {
         name: "STATE",
       },
       storeName: "naf-rev2",
       className: " custom-theme",
+      max: 8,
     },
   ],
 };

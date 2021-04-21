@@ -32,7 +32,11 @@ function LoadStores({ jsonLunatic = {} }) {
       if (Array.isArray(suggesters)) {
         const str = suggesters.reduce(function (a, name) {
           const storeInfo = getStoreInfo(name);
-          return { ...a, [name]: storeInfo };
+          if (storeInfo) {
+            return { ...a, [name]: storeInfo };
+          }
+          console.warn(`Unmanaged suggester ${name}`);
+          return a;
         }, {});
         setStores(str);
         setDisabled(false);
