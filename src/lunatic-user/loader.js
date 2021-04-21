@@ -2,7 +2,18 @@ import React, { useEffect, useState } from "react";
 import { storeIndex } from "lunatic-suggester";
 import Progress from "./progress";
 
-function Loader({ start, db, store, idbVersion = "1", fetch }) {
+function postLoad() {
+  console.log("end");
+}
+
+function Loader({
+  start,
+  db,
+  store,
+  idbVersion = "1",
+  fetch,
+  post = postLoad,
+}) {
   const [progress, setProgress] = useState(0);
   const [entities, setEntities] = useState(undefined);
   const { name, fields } = store;
@@ -37,11 +48,12 @@ function Loader({ start, db, store, idbVersion = "1", fetch }) {
         log
       );
 
-      async function go(store) {
+      async function go() {
         try {
           if (entities && db) {
             storeIndex.clearData(db);
             await start(entities);
+            post(name);
           }
         } catch (e) {
           console.log(e);
@@ -54,7 +66,7 @@ function Loader({ start, db, store, idbVersion = "1", fetch }) {
         abort();
       };
     },
-    [name, fields, db, entities, idbVersion]
+    [name, fields, db, entities, idbVersion, post]
   );
 
   return (

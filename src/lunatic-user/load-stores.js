@@ -1,14 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import getStoreInfo from "./get-store-info";
 import Fab from "@material-ui/core/Fab";
 import Loop from "@material-ui/icons/Loop";
 import { storeIndex } from "lunatic-suggester";
 import Loader from "./loader";
 
-function OpenAndLoad({ store, fetch, start, idbVersion }) {
+function isEnded(map) {
+  return Object.values(map).reduce(function (state, s) {
+    return state && s;
+  }, true);
+}
+
+function OpenAndLoad({ store, fetch, start, idbVersion, post }) {
   const db = storeIndex.useStoreIndex(store, idbVersion);
   if (db) {
-    return <Loader start={start} db={db} store={store} fetch={fetch} />;
+    return (
+      <Loader start={start} db={db} store={store} fetch={fetch} post={post} />
+    );
   }
   return "waiting...";
 }
@@ -33,10 +41,31 @@ function LoadStores({ jsonLunatic = {} }) {
     [suggesters]
   );
 
+  const postProcess = useMemo(
+    function () {
+      if (Array.isArray(suggesters)) {
+        const done = suggesters.reduce(
+          (a, name) => ({ ...a, [name]: false }),
+          {}
+        );
+        return function (sn) {
+          done[sn] = true;
+          if (isEnded(done)) {
+            setDisabled(false);
+            setStart(false);
+          }
+        };
+      }
+
+      return () => null;
+    },
+    [suggesters]
+  );
+
   if (Array.isArray(suggesters)) {
     if (stores) {
       const content = suggesters.reduce(function (a, name) {
-        if (name in stores) {
+        if (stores[name]) {
           const { store, fetch } = stores[name];
 
           return [
@@ -47,6 +76,7 @@ function LoadStores({ jsonLunatic = {} }) {
               fetch={fetch}
               start={start}
               idbVersion="1"
+              post={postProcess}
             />,
           ];
         }
@@ -59,7 +89,10 @@ function LoadStores({ jsonLunatic = {} }) {
             disabled={disabled}
             color="primary"
             aria-label="add"
-            onClick={() => setStart(true)}
+            onClick={() => {
+              setStart(true);
+              setDisabled(true);
+            }}
           >
             <Loop />
           </Fab>

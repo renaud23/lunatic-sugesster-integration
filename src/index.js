@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { Application } from "./lunatic-user";
 
 const JSON_LUNATIC = {
-  suggesters: ["cog", "nafRev2"],
+  suggesters: ["cog", "naf-rev2"],
   components: [
     {
       id: "j4nw5cqz",

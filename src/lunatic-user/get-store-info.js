@@ -11,8 +11,8 @@ import cog from "./cog";
 import nafRev2 from "./naf-rev2";
 
 const STORES = {
-  cog,
-  nafRev2,
+  [cog.store.name]: cog,
+  [nafRev2.store.name]: nafRev2,
 };
 
 function getStoreInfo(name) {
