@@ -58,10 +58,10 @@ function Loader({ start, db, store, idbVersion = "1", fetch }) {
   );
 
   return (
-    <>
+    <span style={{ position: "relative" }}>
       <span style={{ position: "absolute", top: 0 }}>{name}</span>
       <Progress value={progress} display={true} />
-    </>
+    </span>
   );
 }
 

@@ -1,5 +1,9 @@
 import { LunaticIDBSuggester } from "lunatic-suggester";
 
+function Unmocked() {
+  return <div>Composant Lunatic.</div>;
+}
+
 /**
  * getStoreInfo : une fonction, fourni par l'intégrateur lunatique. Elle permet à l'ochestrateur d'indiquer au suggester
  * les quelques éléments nécessaires à son instanciation et spécifique à l'application.
@@ -15,7 +19,6 @@ function create(getStoreInfo) {
         if (componentType === "IdbSuggester") {
           const { storeName } = component;
           const { optionRenderer, labelRenderer } = getStoreInfo(storeName);
-          console.log(storeName);
           return [
             ...a,
             <LunaticIDBSuggester
@@ -26,7 +29,7 @@ function create(getStoreInfo) {
             />,
           ];
         }
-        return a;
+        return [...a, <Unmocked key={index} />];
       }, []);
     }
     return [];
