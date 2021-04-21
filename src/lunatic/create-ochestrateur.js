@@ -4,6 +4,23 @@ function Unmocked() {
   return <div>Composant Lunatic.</div>;
 }
 
+function SuggesterWithLabel({ labelId, label, storeInfo, className }) {
+  const { optionRenderer, labelRenderer, store } = storeInfo;
+  const { name } = store;
+  return (
+    <>
+      <div id={labelId}>{label}</div>
+      <LunaticIDBSuggester
+        storeName={name}
+        optionRenderer={optionRenderer}
+        labelRenderer={labelRenderer}
+        labelledBy={labelId}
+        className={className}
+      />
+    </>
+  );
+}
+
 /**
  * getStoreInfo : une fonction, fourni par l'intégrateur lunatique. Elle permet à l'ochestrateur d'indiquer au suggester
  * les quelques éléments nécessaires à son instanciation et spécifique à l'application.
@@ -17,15 +34,17 @@ function create(getStoreInfo) {
       return components.reduce(function (a, component, index) {
         const { componentType } = component;
         if (componentType === "IdbSuggester") {
-          const { storeName } = component;
-          const { optionRenderer, labelRenderer } = getStoreInfo(storeName);
+          const { storeName, label, className } = component;
+          const storeInfo = getStoreInfo(storeName);
+          const labelId = `lunatic-label-${storeName}`;
           return [
             ...a,
-            <LunaticIDBSuggester
-              key={`orchestrateur-${index + 1}`}
-              storeName={storeName}
-              optionRenderer={optionRenderer}
-              labelRenderer={labelRenderer}
+            <SuggesterWithLabel
+              key={`orchestrateur-IdbSuggester-${storeName}`}
+              storeInfo={storeInfo}
+              label={label}
+              labelId={labelId}
+              className={className}
             />,
           ];
         }

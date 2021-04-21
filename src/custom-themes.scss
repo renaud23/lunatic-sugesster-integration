@@ -14,7 +14,7 @@
 .custom-theme {
   &.lunatic-suggester {
     min-height: 30px;
-    width: 100%;
+    width: 420px;
     .lunatic-suggester-container {
       /* */
       border-radius: 5px;
@@ -32,6 +32,7 @@
           height: 30px;
           line-height: 30px;
           font-size: 15px;
+          display: block;
 
           &::placeholder {
             @include placeholder();
@@ -42,6 +43,7 @@
           height: 30px;
           line-height: 30px;
           background-color: snow;
+          border-radius: 5px;
 
           .placeholder {
             display: block;
