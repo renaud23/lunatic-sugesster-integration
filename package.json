@@ -14,7 +14,7 @@
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
     "core-js": "^3.10.1",
-    "lunatic-suggester": "^0.1.5",
+    "lunatic-suggester": "^0.1.6",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-scripts": "4.0.3",
